@@ -6,36 +6,43 @@ public class VehicleInfo {
     private double engineSize;
     private double lastOilChange;
 
-    //Vin
-    public int getVin() {
-        return this.vin;
+    public VehicleInfo(int vin, double odometer, double consumption, double engineSize, double lastOilChange) {
+        this.vin = vin;
+        this.odometer = odometer;
+        this.consumption = consumption;
+        this.engineSize = engineSize;
+        this.lastOilChange = lastOilChange;
     }
 
-    public void setVin(int vin){
+    public VehicleInfo() {
+    }
+
+    public int getVin() {
+        return vin;
+    }
+
+    public void setVin(int vin) {
         this.vin = vin;
     }
 
-    //odometer
     public double getOdometer() {
-        return this.odometer;
+        return odometer;
     }
 
     public void setOdometer(double odometer) {
         this.odometer = odometer;
     }
 
-    //gas consumption
     public double getConsumption() {
-        return this.consumption;
+        return consumption;
     }
 
     public void setConsumption(double consumption) {
         this.consumption = consumption;
     }
 
-    //engine size
     public double getEngineSize() {
-        return this.engineSize;
+        return engineSize;
     }
 
     public void setEngineSize(double engineSize) {
@@ -43,11 +50,10 @@ public class VehicleInfo {
     }
 
     public double getLastOilChange() {
-        return this.lastOilChange;
+        return lastOilChange;
     }
 
     public void setLastOilChange(double lastOilChange) {
         this.lastOilChange = lastOilChange;
     }
 }
-
