@@ -1,3 +1,6 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class VehicleInfo {
 
     private int vin;
@@ -55,5 +58,10 @@ public class VehicleInfo {
 
     public void setLastOilChange(double lastOilChange) {
         this.lastOilChange = lastOilChange;
+    }
+
+    public String toJson() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(this);
     }
 }
