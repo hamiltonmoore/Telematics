@@ -20,57 +20,44 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TelematicsServices {
 
-    void report(VehicleInfo vehicleInfo) {
+    void report(VehicleInfo vehicleInfo) throws IOException {
 
-        // Write the VehicleInfo to a file as json
-        writeJsonFile();
-
-        // Find all the files that end with ".json" and convert back to VehicleInfo object.
-        collectAllJson();
-
-        // Update a dashboard.html
-        writeOutDashboard();
-
-    }
-
-    private void writeJsonFile(VehicleInfo vehicleInfo) {
         try {
-            File outputFile = new File(Integer.toString(vehicleInfo.getVin()) + ".json");   //also tried (vehicleInfo.vin)
-            FileWriter fileWriter = new FileWriter(outputFile);
+            File outputFile = new File(Integer.toString(vehicleInfo.getVin()) + ".json");  //creates file, with file name of vin-puts that in outputFile
+            FileWriter fileWriter = new FileWriter(outputFile);  //passes new File into fileWriter, to make a FileWriter
 
-            fileWriter.write(vehicleInfo.toJson());
+            fileWriter.write(vehicleInfo.toJson());  //fileWriter comes from above with new FileWriter and writes to file
 
-            fileWriter.close();
+            fileWriter.close(); //writing stopped
+
+            /*
+    convert json to an object
+    store object in a list
+    return list to be used for insertion into html
+     */
+
+            List<vehicleList> vehicleList = new ArrayList<>();  //establishes an array list called vehicleList
+            File file = new File(".");   //this is instantiating a new File object, from file imported
+            for (File f : file.listFiles()) {
+                if (f.getName().endsWith(".json")) {
+                    Scanner findFile = new Scanner(f);  //this finds file via scanner, f has been passed in
+                    String json = findFile.nextLine();
+                    ObjectMapper mapper = new ObjectMapper();
+                    VehicleInfo vehicleInfo = mapper.readValue(json, VehicleInfo.class);
+                }
+            }
+
+            //write out dashboard
+            vehicleInfo   //I believe this somehow needs to be passed in 
+                    String html = "some random string #replace-me and don't replace me here.";
+            System.out.println(html.replace("#reaplce-me", "SOMETHING-NEW"));
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    /*
-    convert json to an object
-    store object in a list
-    return list to be used for insertion into html
-     */
-    private ArrayList<VehicleInfo> collectAllJson() throws IOException {
-        String[] list;
-        File file = new File(".");
-        for (File f : file.listFiles()) {
-            if (f.getName().endsWith(".json")) {
-                Scanner findFile = new Scanner(f);
-                String json = findFile.nextLine();
-                ObjectMapper mapper = new ObjectMapper();
-                VehicleInfo vehicleInfo = mapper.readValue(json, VehicleInfo.class);
-            }
-            }
-        return list = { VehicleInfo };
-    }
-    }
-    
-/*
 
-*/
-
-    public String writeOutDashboard() {
 
 
 
