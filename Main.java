@@ -1,29 +1,34 @@
+import java.io.IOException;
 import java.util.Scanner;
 
+
 public class Main {
-    static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
 
-        int vin = promptForInt("what is your vin number");
+        System.out.println("Enter VIN Number");
+        int vin = scanner.nextInt();
 
-        double odometer = promptForDouble("Enter your odometer reading");
+        System.out.println("Enter you odometer reading");
+        double odometer = scanner.nextDouble();
 
-        double consumption = promptForDouble("Enter your fuel consumption");
+        System.out.println("Enter your fuel consumption");
+        double consumption = scanner.nextDouble();
 
-        double engineSize = promptForDouble("what is your engine size?");
+        System.out.println("What is your engine size?");
+        double engineSize = scanner.nextDouble();
 
-        double lastOilChange = promptForDouble("How many miles did you have on your last oil change?")
+        System.out.println("How many miles did you have on your last oil change?");
+        double lastOilChange = scanner.nextDouble();
 
         VehicleInfo vehicleInfo = new VehicleInfo(vin, odometer, consumption, engineSize, lastOilChange);
-    }
 
-    private static double promptForDouble(String prompt) {
-        return Double.parseDouble(scanner.nextLine());
-    }
 
-    private static int promptForInt(String prompt) {
-        return Integer.parseInt(scanner.nextLine());
+        TelematicsServices service = new TelematicsServices();
+
+        service.report(vehicleInfo);
+
     }
 
 }
